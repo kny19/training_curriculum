@@ -1,3 +1,4 @@
+Copy code
 <%= form_with model: @plan, url: calendars_path, class: 'form' do |f| %>
   <%= f.label :日付を選択, class: 'label' %>
   <%= f.date_field :date, class: 'date-select' %>
@@ -10,14 +11,14 @@
   <% @week_days.each do |day| %>
     <div class='item'>
       <div class='date'>
-        <%= day[:month] %>/<%= day[:date] %>
+        <%= day[:month] %>/<%= day[:date].to_s %>（<%= Date.parse(day[:date].to_s).strftime("%a") %>）
       </div>
       <ul class='content'>
-      <% if day[:plans].length != 0 %>
-        <% day[:plans].each do |plan| %>
-          <li class='plan-list'>・<%= plan %></li>
+        <% if day[:plans].length != 0 %>
+          <% day[:plans].each do |plan| %>
+            <li class='plan-list'>・<%= plan %></li>
+          <% end %>
         <% end %>
-      <% end %>
       </ul>
     </div>
   <% end %>
